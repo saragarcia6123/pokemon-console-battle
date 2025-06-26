@@ -26,20 +26,19 @@ def parse_data(data):
     parsed = {}
 
     parsed["id"] = data["id"]
-    parsed["name"] = data["name"]
+    parsed["name"] = data["name"].upper()
 
-    parsed["type-1"] = data["types"][0]["type"]["name"]
+    parsed["type-1"] = data["types"][0]["type"]["name"].upper()
     if len(data["types"]) > 1:
-        parsed["type-2"] = data["types"][1]["type"]["name"]
+        parsed["type-2"] = data["types"][1]["type"]["name"].upper()
 
     parsed["base-xp"] = int(data["base_experience"])
-
-    parsed["hp"] = int(data["stats"][0]["base_stat"])
-    parsed["attack"] = int(data["stats"][1]["base_stat"])
-    parsed["defense"] = int(data["stats"][2]["base_stat"])
-    parsed["special-attack"] = int(data["stats"][3]["base_stat"])
-    parsed["special-defense"] = int(data["stats"][4]["base_stat"])
-    parsed["speed"] = int(data["stats"][5]["base_stat"])
+    parsed["base-hp"] = int(data["stats"][0]["base_stat"])
+    parsed["base-attack"] = int(data["stats"][1]["base_stat"])
+    parsed["base-defense"] = int(data["stats"][2]["base_stat"])
+    parsed["base-special-attack"] = int(data["stats"][3]["base_stat"])
+    parsed["base-special-defense"] = int(data["stats"][4]["base_stat"])
+    parsed["base-speed"] = int(data["stats"][5]["base_stat"])
 
     parsed["height"] = int(data["height"])
     parsed["weight"] = int(data["weight"])
@@ -60,7 +59,7 @@ async def create_pokedex(id_from: int = 1, id_to: int = 9):
 
 def write_pokedex_to_json(pokedex):
     j = json.dumps(pokedex, indent=4)
-    with open("pokedex.json", "w") as f:
+    with open("resources/pokedex.json", "w") as f:
         print(j, file=f)
 
 

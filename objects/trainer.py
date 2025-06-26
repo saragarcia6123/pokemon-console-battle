@@ -2,7 +2,7 @@ from objects.party import Party
 from objects.pokemon import Pokemon
 
 
-class Player:
+class Trainer:
 
     def __init__(self, name: str, party: list[Pokemon] | None):
         self.name = name
