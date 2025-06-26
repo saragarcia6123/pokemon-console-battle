@@ -1,3 +1,4 @@
-python-cli-menu
 aiohttp
 asyncio
+pydantic
+inquirer
