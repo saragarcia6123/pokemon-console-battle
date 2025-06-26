@@ -24,11 +24,28 @@ def parse_moves(moves_data: dict):
 
 def parse_data(data):
     parsed = {}
+
+    parsed["id"] = data["id"]
     parsed["name"] = data["name"]
-    parsed["base_exp"] = int(data["base_experience"])
+
+    parsed["type-1"] = data["types"][0]["type"]["name"]
+    if len(data["types"]) > 1:
+        parsed["type-2"] = data["types"][1]["type"]["name"]
+
+    parsed["base-xp"] = int(data["base_experience"])
+
+    parsed["hp"] = int(data["stats"][0]["base_stat"])
+    parsed["attack"] = int(data["stats"][1]["base_stat"])
+    parsed["defense"] = int(data["stats"][2]["base_stat"])
+    parsed["special-attack"] = int(data["stats"][3]["base_stat"])
+    parsed["special-defense"] = int(data["stats"][4]["base_stat"])
+    parsed["speed"] = int(data["stats"][5]["base_stat"])
+
     parsed["height"] = int(data["height"])
     parsed["weight"] = int(data["weight"])
-    parsed["moves_learned"] = parse_moves(data["moves"])
+
+    parsed["moves"] = parse_moves(data["moves"])
+
     return parsed
 
 
@@ -37,7 +54,7 @@ async def create_pokedex(id_from: int = 1, id_to: int = 9):
     for id in range(id_from, id_to + 1):
         data = await fetch(f"/pokemon/{id}")
         pokedex[id] = parse_data(data)
-        time.sleep(0.1)
+        time.sleep(0.05)
     return pokedex
 
 
