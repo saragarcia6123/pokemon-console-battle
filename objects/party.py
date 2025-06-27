@@ -11,7 +11,7 @@ class MinPartyCountError(Exception):
 
 class Party:
 
-    def __init__(self, party: list[Pokemon] | None):
+    def __init__(self, party: list[Pokemon] | None = None):
         if not party:
             party = []
         self.party = party
